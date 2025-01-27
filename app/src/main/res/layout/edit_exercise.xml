@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditExerciseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Exercise"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/name_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Exercise Name"
+        android:text="Current Exercise Name"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/header_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+<androidx.appcompat.widget.AppCompatEditText
+android:id="@+id/repetition_field"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Repetition"
+android:text="10"
+    android:inputType="number"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:padding="12dp"
+    app:layout_constraintTop_toBottomOf="@id/name_field"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<androidx.appcompat.widget.AppCompatEditText
+android:id="@+id/set_field"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Set"
+android:text="3"
+    android:inputType="number"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:padding="12dp"
+    app:layout_constraintTop_toBottomOf="@id/repetition_field"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<androidx.appcompat.widget.AppCompatEditText
+android:id="@+id/duration_field"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Duration (minutes)"
+android:text="30"
+    android:inputType="number"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:padding="12dp"
+    app:layout_constraintTop_toBottomOf="@id/set_field"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<androidx.appcompat.widget.AppCompatEditText
+android:id="@+id/notes_field"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Notes"
+android:text="Current notes..."
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:padding="12dp"
+    app:layout_constraintTop_toBottomOf="@id/duration_field"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Submit Button -->
+<Button
+android:id="@+id/submit_button"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:text="Submit"
+android:textColor="#FFFFFF"
+android:background="#2196F3"
+    android:layout_marginTop="24dp"
+    app:layout_constraintTop_toBottomOf="@id/notes_field"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:padding="12dp" />
+
+    <!-- Validation Message -->
+<TextView
+android:id="@+id/validation_message"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Please fill out all required fields correctly."
+android:textColor="#FF0000"
+    android:textSize="14sp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:visibility="gone"
+    app:layout_constraintTop_toBottomOf="@id/submit_button"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    </RelativeLayout>

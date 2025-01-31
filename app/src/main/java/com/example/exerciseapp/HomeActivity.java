@@ -9,9 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.exerciseapp.databinding.HomeActivityBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,74 +24,29 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ExerciseAdapter exerciseAdapter;
-    private List<String> exerciseList;
+    HomeActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
 
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize exercise list
-        exerciseList = new ArrayList<>();
-        exerciseList.add("Push Up");
-        exerciseList.add("Squat");
-        exerciseList.add("Plank");
-        exerciseList.add("Jumping Jacks");
-        exerciseList.add("Burpees");
-        exerciseList.add("Lunges");
-        exerciseList.add("Sit Up");
-
-        // Initialize adapter
-        exerciseAdapter = new ExerciseAdapter(exerciseList);
-        recyclerView.setAdapter(exerciseAdapter);
-
-        // Setup FloatingActionButton
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            // Navigate to Add Exercise page
-            Toast.makeText(this, "Navigate to Add Exercise page", Toast.LENGTH_SHORT).show();
-        });
-
-        // Setup BottomNavigationView
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.nav_home:
-                    Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
-                    return true;
-                case R.id.nav_profile:
-                    Toast.makeText(this, "Profile selected", Toast.LENGTH_SHORT).show();
-                    return true;
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if(item.getItemId()==R.id.home){
+                replaceFragment(new HomeFragment());
+            } else {
+                replaceFragment(new ProfileFragment());
             }
-            return false;
+            return true;
         });
+
     }
+    private void replaceFragment(Fragment fragment){
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                exerciseAdapter.getFilter().filter(newText);
-                return true;
-            }
-        });
-        return true;
+        FragmentManager fragmentManager =  getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.commit();
     }
 }

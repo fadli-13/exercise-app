@@ -1,75 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseDetailActivity">
+    android:background="@drawable/profile_background">
 
-    <TextView
-        android:id="@+id/exercise_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Exercise Name"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/exercise_set_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set: 3, Duration: 30 mins"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/exercise_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_centerHorizontal="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/stopwatch_display"
+            android:id="@+id/exerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="00:00"
-            android:textColor="#000000"
-            android:textSize="30sp" />
+            android:text="Bench Press"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/stopwatch_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:contentDescription="Start/Stop Stopwatch" />
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="3x Sets"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
-    <TextView
-        android:id="@+id/exercise_repetition"
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="20 Minutes"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Stopwatch Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#6F6FD4"
+            android:padding="10dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/stopwatchDisplay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="00:00:00"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/playStopButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="Play Button"
+                android:src="@android:drawable/ic_media_play" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/repetitions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="3x reps"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Notes Section -->
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notes:"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/notes_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <!-- Floating Buttons (Edit & Delete) -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repetition: 12"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/exercise_set_duration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="bottom|end">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Edit Exercise"
+            android:src="@android:drawable/ic_menu_edit"
+            app:backgroundTint="@android:color/holo_blue_dark" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:contentDescription="Delete Exercise"
+            android:src="@android:drawable/ic_menu_delete"
+            app:backgroundTint="#E33D3D" />
+    </LinearLayout>
+
+</FrameLayout>

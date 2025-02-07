@@ -29,14 +29,24 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = HomeActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+
+        if (savedInstanceState == null) {
+            replaceFragment(new HomeFragment());
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if(item.getItemId()==R.id.home){
-                replaceFragment(new HomeFragment());
-            } else {
-                replaceFragment(new ProfileFragment());
+            Fragment selectedFragment = null;
+
+            if (item.getItemId() == R.id.home) {
+                selectedFragment = new HomeFragment();
+            } else if (item.getItemId() == R.id.profile) {
+                selectedFragment = new ProfileFragment();
+            }
+
+            if (selectedFragment != null) {
+                replaceFragment(selectedFragment);
             }
             return true;
         });

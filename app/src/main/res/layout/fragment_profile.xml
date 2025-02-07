@@ -38,7 +38,8 @@
                 android:layout_marginTop="35dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:text="Fadli Anshori Lubis"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="male"/>
 
                 <View
                     android:layout_width="1dp"
@@ -67,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="22y/o"/>
             </LinearLayout>
 
             <TextView
@@ -85,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="strive for excellent"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,7 +125,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:text="110kg"/>
 
                     <View
                         android:layout_width="1dp"
@@ -144,7 +149,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:text="180cm" />
                 </LinearLayout>
 
                 <View
@@ -177,7 +183,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="fadli7"/>
 
             </RelativeLayout>
 
@@ -203,7 +210,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="2 months"/>
 
             </RelativeLayout>
 
@@ -229,7 +237,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="+62812345678" />
 
             </RelativeLayout>
 
@@ -255,7 +264,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:text="fadli@gmail.com"/>
 
             </RelativeLayout>
 

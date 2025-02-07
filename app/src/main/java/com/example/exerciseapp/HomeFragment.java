@@ -1,12 +1,21 @@
 package com.example.exerciseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,10 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private ExerciseAdapter adapter;
+    private List<Exercise> exerciseList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,11 +67,32 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        exerciseList = new ArrayList<>();
+        exerciseList.add(new Exercise("Bench Press"));
+        exerciseList.add(new Exercise("Squats"));
+        exerciseList.add(new Exercise("Deadlifts"));
+
+        adapter = new ExerciseAdapter(exerciseList);
+        recyclerView.setAdapter(adapter);
+
+//        FloatingActionButton fabAddExercise = view.findViewById(R.id.fab_add_exercise);
+//        fabAddExercise.setOnClickListener(v -> {
+//            // Membuat Intent untuk berpindah ke AddExerciseActivity
+//            Intent intent = new Intent(getActivity(), AddExerciseActivity.class);
+//
+//            startActivity(intent);
+//        });
+
     }
 }

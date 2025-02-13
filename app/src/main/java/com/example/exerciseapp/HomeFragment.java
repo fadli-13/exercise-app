@@ -2,15 +2,15 @@ package com.example.exerciseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,6 +32,8 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private SearchView searchView;
 
     private RecyclerView recyclerView;
     private ExerciseAdapter adapter;
@@ -75,6 +77,20 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        searchView = view.findViewById(R.id.searchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -86,13 +102,26 @@ public class HomeFragment extends Fragment {
         adapter = new ExerciseAdapter(exerciseList);
         recyclerView.setAdapter(adapter);
 
-//        FloatingActionButton fabAddExercise = view.findViewById(R.id.fab_add_exercise);
-//        fabAddExercise.setOnClickListener(v -> {
-//            // Membuat Intent untuk berpindah ke AddExerciseActivity
-//            Intent intent = new Intent(getActivity(), AddExerciseActivity.class);
-//
-//            startActivity(intent);
-//        });
+        FloatingActionButton fabAddExercise = view.findViewById(R.id.fab_add_exercise);
+        fabAddExercise.setOnClickListener(v -> {
+            // Membuat Intent untuk berpindah ke AddExerciseActivity
+            Intent intent = new Intent(getActivity(), AddExerciseActivity.class);
 
+            startActivity(intent);
+        });
+
+    }
+
+    private void filterList(String text) {
+        List<Exercise> filteredList = new ArrayList<>();
+        for (Exercise exercise : exerciseList){
+            if (exercise.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(exercise);
+            }
+        }
+
+        if (filteredList.isEmpty()){
+            Toast.makeText(this, "no data found", Toast.LENGTH_SHORT).show();
+        }
     }
 }

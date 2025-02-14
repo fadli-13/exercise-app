@@ -95,9 +95,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         exerciseList = new ArrayList<>();
-        exerciseList.add(new Exercise("Bench Press"));
-        exerciseList.add(new Exercise("Squats"));
-        exerciseList.add(new Exercise("Deadlifts"));
 
         exerciseAdapter = new ExerciseAdapter(exerciseList);
         recyclerView.setAdapter(exerciseAdapter);

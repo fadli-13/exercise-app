@@ -14,12 +14,17 @@ import java.util.List;
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
     private List<Exercise> exerciseList;
 
+    public void setFilteredList(List<Exercise> filteredList){
+        this.exerciseList = filteredList;
+        notifyDataSetChanged();
+    }
+
     public static class ExerciseViewHolder extends RecyclerView.ViewHolder {
         public TextInputEditText exerciseNameEditText;
 
         public ExerciseViewHolder(View itemView) {
             super(itemView);
-            exerciseNameEditText = itemView.findViewById(R.id.exercise_name_edittext); // Sesuaikan dengan ID di XML item
+            exerciseNameEditText = itemView.findViewById(R.id.exercise_name_edittext);
         }
     }
 
@@ -38,7 +43,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         Exercise exercise = exerciseList.get(position);
 
-        // Cegah NullPointerException
         if (exercise != null && exercise.getName() != null) {
             holder.exerciseNameEditText.setText(exercise.getName());
         } else {

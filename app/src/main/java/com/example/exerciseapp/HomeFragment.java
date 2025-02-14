@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     private SearchView searchView;
 
     private RecyclerView recyclerView;
-    private ExerciseAdapter adapter;
+    private ExerciseAdapter exerciseAdapter;
     private List<Exercise> exerciseList;
 
     public HomeFragment() {
@@ -99,12 +99,11 @@ public class HomeFragment extends Fragment {
         exerciseList.add(new Exercise("Squats"));
         exerciseList.add(new Exercise("Deadlifts"));
 
-        adapter = new ExerciseAdapter(exerciseList);
-        recyclerView.setAdapter(adapter);
+        exerciseAdapter = new ExerciseAdapter(exerciseList);
+        recyclerView.setAdapter(exerciseAdapter);
 
         FloatingActionButton fabAddExercise = view.findViewById(R.id.fab_add_exercise);
         fabAddExercise.setOnClickListener(v -> {
-            // Membuat Intent untuk berpindah ke AddExerciseActivity
             Intent intent = new Intent(getActivity(), AddExerciseActivity.class);
 
             startActivity(intent);
@@ -121,7 +120,9 @@ public class HomeFragment extends Fragment {
         }
 
         if (filteredList.isEmpty()){
-            Toast.makeText(this, "no data found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "No data found", Toast.LENGTH_SHORT).show();
+        }else{
+            exerciseAdapter.setFilteredList(filteredList);
         }
     }
 }

@@ -20,10 +20,10 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/nameInput"
+        android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bench Press"
+        android:text=""
         android:textSize="18sp" />
 
     <TextView
@@ -34,10 +34,10 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/repetitionInput"
+        android:id="@+id/editRepetition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="15"
+        android:text=""
         android:inputType="number"
         android:textSize="18sp" />
 
@@ -49,10 +49,10 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/setInput"
+        android:id="@+id/editSets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="3"
+        android:text=""
         android:inputType="number"
         android:textSize="18sp" />
 
@@ -64,10 +64,10 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/durationInput"
+        android:id="@+id/editDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="12"
+        android:text=""
         android:inputType="number"
         android:textSize="18sp" />
 
@@ -79,14 +79,14 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/notesInput"
+        android:id="@+id/editNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="note"
+        android:text=""
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SUBMIT"

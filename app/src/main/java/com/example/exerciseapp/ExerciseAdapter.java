@@ -1,34 +1,27 @@
 package com.example.exerciseapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 import java.util.List;
 
-
-public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
+class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
     private List<Exercise> exerciseList;
+    private List<Exercise> fullExerciseList;
+    private HomeFragment.OnItemClick listener;
 
+    private static final int REQUEST_CODE_DELETE = 2;
 
-    public ExerciseAdapter(List<Exercise> exerciseList) {
-        this.exerciseList = exerciseList;
-    }
-
-    public void setFilteredList(List<Exercise> filteredList){
-        this.exerciseList = filteredList;
-        notifyDataSetChanged();
-    }
-
-    public static class ExerciseViewHolder extends RecyclerView.ViewHolder {
-        public TextView exerciseName;
-
-        public ExerciseViewHolder(View itemView) {
-            super(itemView);
-            exerciseName = itemView.findViewById(R.id.exercise_name_textview);
-        }
+    public ExerciseAdapter(List<Exercise> exerciseList, HomeFragment.OnItemClick listener) {
+        this.exerciseList = new ArrayList<>(exerciseList);
+        this.fullExerciseList = new ArrayList<>(exerciseList);
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,10 +35,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         Exercise exercise = exerciseList.get(position);
         holder.name.setText(exercise.getName());
-        holder.repetition.setText("Reps: " + exercise.getRepetition());
-        holder.set.setText("Sets: " + exercise.getSet());
-        holder.duration.setText("Duration: " + exercise.getDuration());
-        holder.notes.setText("Notes: " + exercise.getNotes());
+
+        holder.itemView.setOnClickListener(v -> {
+            listener.sendData(exercise, position);
+        });
     }
 
     @Override
@@ -53,32 +46,54 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         return exerciseList.size();
     }
 
-    public static class ExerciseViewHolder extends RecyclerView.ViewHolder {
-        TextView name, repetition, set, duration, notes;
+    public void addExercise(Exercise newExercise) {
+        exerciseList.add(newExercise);
+        fullExerciseList.add(newExercise);
+        notifyItemInserted(exerciseList.size() - 1);
+    }
+
+    public void updateExercise(int position, Exercise updatedExercise) {
+        if (position >= 0 && position < exerciseList.size()) {
+            exerciseList.set(position, updatedExercise);
+            notifyItemChanged(position);
+        }
+    }
+
+    public void deleteExercise(int position){
+        exerciseList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, exerciseList.size());
+    }
+
+    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_DELETE && resultCode == Activity.RESULT_OK && data != null) {
+            int deletedPosition = data.getIntExtra("deleted_position", -1);
+            if (deletedPosition != -1 && deletedPosition < exerciseList.size()) {
+                exerciseList.remove(deletedPosition);
+                fullExerciseList.remove(deletedPosition);
+                notifyItemRemoved(deletedPosition);
+            }
+        }
+    }
+
+    static class ExerciseViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
 
         public ExerciseViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.exercise_name_textview);
-            repetition = itemView.findViewById(R.id.repetition_textview);
-            set = itemView.findViewById(R.id.set_textview);
-            duration = itemView.findViewById(R.id.duration_textview);
-            notes = itemView.findViewById(R.id.notes_textview);
         }
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
-//        Exercise exercise = exerciseList.get(position);
-//
-//        if (exercise != null && exercise.getName() != null) {
-//            holder.exerciseName.setText(exercise.getName());
-//        } else {
-//            holder.exerciseName.setText("No Name");
-//        }
-//    }
+    public void setFilteredList(List<Exercise> filteredList) {
+        exerciseList.clear();
+        exerciseList.addAll(filteredList);
+        notifyDataSetChanged();
+    }
 
-    @Override
-    public int getItemCount() {
-        return (exerciseList != null) ? exerciseList.size() : 0;
+    public void resetList() {
+        exerciseList.clear();
+        exerciseList.addAll(fullExerciseList);
+        notifyDataSetChanged();
     }
 }
